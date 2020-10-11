@@ -77,7 +77,6 @@ public class MathTool {
 
     //将字符串转化成表达式
     public static Expression toExpression(String str) {
-        Fraction[] num;
         ArrayList<String> operator=new ArrayList<>();
         String[] s9=str.split("、");
         String s=s9[1].replaceAll(" |=","");

@@ -22,25 +22,27 @@ public class MainTest {
     }
 
     @Test
-    public void exerciseRunTest() throws IOException {
-        Main.exerciseRun(10,10);
-    }
-
-    @Test
-    public void cheackAnswerTest1() throws IOException {
-        Main.checkAnswer("C:\\Users\\ASUS\\Desktop\\Four Operations\\exercisefile.txt","C:\\Users\\ASUS\\Desktop\\Four Operations\\answerfile.txt");
-    }
-    @Test
-    public void cheackAnswerTest2() throws IOException {
-        Main.checkAnswer("C:\\Users\\ASUS\\Desktop\\Four Operations\\exercisefile.txt","C:\\Users\\ASUS\\Desktop\\Four Operations\\answerfile.txt");
-    }
-
-    @Test
     public void toExpressionrTest() {
         String str="1、4'1/2+2-2'7/8-2=";
         Expression e=MathTool.toExpression(str);
         System.out.println(e.getExercise());
         System.out.println(e.getResult().toMixedNumber());
     }
+
+    @Test
+    public void exerciseRunTest() throws IOException {
+        Main.exerciseRun(10,10);
+    }
+
+    @Test
+    public void cheackAnswerTest1() throws IOException {
+        Main.checkAnswer("C:\\Users\\ASUS\\Desktop\\FourOperations\\exercisefile.txt","C:\\Users\\ASUS\\Desktop\\FourOperations\\answerfile.txt");
+    }
+    @Test
+    public void cheackAnswerTest2() throws IOException {
+        Main.checkAnswer("C:\\Users\\ASUS\\Desktop\\FourOperations\\exercisefile.txt","C:\\Users\\ASUS\\Desktop\\FourOperations\\answerfile.txt");
+    }
+
+
 
 }

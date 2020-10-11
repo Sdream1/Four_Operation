@@ -46,15 +46,22 @@ public class Expression {
             num[2]= MathTool.getRandomFraction(range,range);
 
             //避免计算过程中出现负数
-            if ("-" == operator[1]) {
-                while (num[2].less(MathTool.calculator(num[0],operator[0],num[1]))) {
-                    num[2] = MathTool.getRandomFraction(range, range);
+            if (("-"==operator[0])&& ("+" == operator[1] || "-" == operator[1])) {
+                while(num[0].less(num[1])) {
+                    num[0]=MathTool.getRandomFraction(range, range);
                 }
             }
+
             //避免计算过程中出现负数
             if ("-" == operator[0] && ("×" == operator[1] || "÷" == operator[1])) {
                 while (num[0].less(MathTool.calculator(num[1],operator[1],num[2]))) {
                     num[0] = MathTool.getRandomFraction(range, range);
+                }
+            }
+
+            if ("-" == operator[1]) {
+                while (num[2].less(MathTool.calculator(num[0],operator[0],num[1]))) {
+                    num[2] = MathTool.getRandomFraction(range, range);
                 }
             }
         }
