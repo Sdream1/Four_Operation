@@ -1,6 +1,5 @@
 package org.demo;
 
-
 import org.tool.MathTool;
 
 import java.io.*;
@@ -11,7 +10,7 @@ import static org.tool.MathTool.toFraction;
 public class Main {
     public static void main(String[] args) throws IOException {
         ArrayList<Expression> e=exerciseRun(10,10);
-        checkAnswer(e,"C:\\Users\\ASUS\\Desktop\\Four Operations\\answerfile.txt");
+        checkAnswer("C:\\Users\\ASUS\\Desktop\\Four Operations\\exercisefile.txt","C:\\Users\\ASUS\\Desktop\\Four Operations\\answerfile.txt");
     }
 
     //生成所需数量，数值范围的题目
@@ -38,23 +37,32 @@ public class Main {
         return ep;
     }
 
-    public static void checkAnswer (ArrayList<Expression> e,String afile) throws IOException {
+    public static void checkAnswer (String tfile,String afile) throws IOException {
         int correctNum=0;//正确数
         ArrayList<Integer> correctTitle = new ArrayList<>();//对题题号
         int wrongNum=0;//错误数
         ArrayList<Integer> wrongTitle = new ArrayList<>();//错题题号
 
-        FileReader fr=new FileReader(afile);
-        BufferedReader reader=new BufferedReader(fr);
-        String tempString;
+        FileReader fr1=new FileReader(tfile);
+        BufferedReader reader1=new BufferedReader(fr1);
+        String tempString1;
+        ArrayList<Fraction> textanswer=new ArrayList<>();
+
+        FileReader fr2=new FileReader(afile);
+        BufferedReader reader2=new BufferedReader(fr2);
+        String tempString2;
         ArrayList<Fraction> selfanswer=new ArrayList<>();
 
-        while((tempString=reader.readLine())!=null) {
-            selfanswer.add(toFraction(InitAnswer(tempString)));
+        while((tempString1=reader1.readLine())!=null) {
+            textanswer.add(MathTool.toExpression(tempString1).getResult());
         }
 
-        for (int i = 0; i < e.size(); i++) {
-            if (e.get(i).equals(selfanswer.get(i))) {
+        while((tempString2=reader2.readLine())!=null) {
+            selfanswer.add(toFraction(InitAnswer(tempString2)));
+        }
+
+        for (int i = 0; i < textanswer.size(); i++) {
+            if(textanswer.get(i).equals(selfanswer.get(i))) {
                 correctNum++;
                 correctTitle.add(i+1);
             }
@@ -63,6 +71,17 @@ public class Main {
                 wrongTitle.add(i+1);
             }
         }
+
+//        for (int i = 0; i < e.size(); i++) {
+//            if (e.get(i).equals(selfanswer.get(i))) {
+//                correctNum++;
+//                correctTitle.add(i+1);
+//            }
+//            else {
+//                wrongNum++;
+//                wrongTitle.add(i+1);
+//            }
+//        }
 
         System.out.print("Correct:"+correctNum+"(");
         for (int i = 0; i < correctTitle.size()-1; i++) {

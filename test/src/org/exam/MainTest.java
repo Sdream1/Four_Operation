@@ -3,14 +3,12 @@ package org.exam;
 import org.demo.Expression;
 import org.demo.Main;
 
-//import org.demo.checkAnswer;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.tool.MathTool;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class MainTest {
     @BeforeClass
@@ -29,8 +27,20 @@ public class MainTest {
     }
 
     @Test
-    public void cheackAnswerTest() throws IOException {
-        ArrayList<Expression> e=Main.exerciseRun(10,10);
-        Main.checkAnswer(e,"C:\\Users\\ASUS\\Desktop\\Four Operations\\answerfile.txt");
+    public void cheackAnswerTest1() throws IOException {
+        Main.checkAnswer("C:\\Users\\ASUS\\Desktop\\Four Operations\\exercisefile.txt","C:\\Users\\ASUS\\Desktop\\Four Operations\\answerfile.txt");
     }
+    @Test
+    public void cheackAnswerTest2() throws IOException {
+        Main.checkAnswer("C:\\Users\\ASUS\\Desktop\\Four Operations\\exercisefile.txt","C:\\Users\\ASUS\\Desktop\\Four Operations\\answerfile.txt");
+    }
+
+    @Test
+    public void toExpressionrTest() {
+        String str="1、4'1/2+2-2'7/8-2=";
+        Expression e=MathTool.toExpression(str);
+        System.out.println(e.getExercise());
+        System.out.println(e.getResult().toMixedNumber());
+    }
+
 }

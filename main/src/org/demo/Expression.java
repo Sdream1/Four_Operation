@@ -9,6 +9,13 @@ public class Expression {
     private Fraction[] num;
     private String[] operator;
 
+    //构造函数
+    public Expression(Fraction[] num,String[] operator) {
+        this.num=num;
+        this.operator=operator;
+        this.operatorNum=operator.length;
+    }
+
     //构造函数，根据符号数的不同构建相应的表达式
     public Expression(int range,int operatorNum) {
         this.range = range;
@@ -19,6 +26,15 @@ public class Expression {
             num[0]= MathTool.getRandomFraction(range,range);
             operator[0]=MathTool.getRandomOperator();
             num[1]= MathTool.getRandomFraction(range,range);
+
+            //避免计算过程中出现负数
+            if("-"==operator[0]) {
+                if(num[0].less(num[1])) {
+                    Fraction temp=num[0];
+                    num[0]=num[1];
+                    num[1]=temp;
+                }
+            }
         }
         else if(2==this.operatorNum) {
             num=new Fraction[3];
@@ -28,6 +44,19 @@ public class Expression {
             num[1]= MathTool.getRandomFraction(range,range);
             operator[1]=MathTool.getRandomOperator();
             num[2]= MathTool.getRandomFraction(range,range);
+
+            //避免计算过程中出现负数
+            if ("-" == operator[1]) {
+                while (num[2].less(MathTool.calculator(num[0],operator[0],num[1]))) {
+                    num[2] = MathTool.getRandomFraction(range, range);
+                }
+            }
+            //避免计算过程中出现负数
+            if ("-" == operator[0] && ("×" == operator[1] || "÷" == operator[1])) {
+                while (num[0].less(MathTool.calculator(num[1],operator[1],num[2]))) {
+                    num[0] = MathTool.getRandomFraction(range, range);
+                }
+            }
         }
         else if(3==this.operatorNum) {
             num=new Fraction[4];
@@ -45,14 +74,14 @@ public class Expression {
     //以字符串的形式返回题目
     public String getExercise() {
         if ((1==this.operatorNum)) {
-            return num[0].toMixedNumber()+""+operator[0]+""+num[1].toMixedNumber()+""+"=";
+            return num[0].toMixedNumber()+" "+operator[0]+" "+num[1].toMixedNumber()+" "+"=";
         }
         else if(2==this.operatorNum) {
-            return num[0].toMixedNumber()+""+operator[0]+""+num[1].toMixedNumber()+""+operator[1]+""+num[2].toMixedNumber()+""+"=";
+            return num[0].toMixedNumber()+" "+operator[0]+" "+num[1].toMixedNumber()+" "+operator[1]+" "+num[2].toMixedNumber()+" "+"=";
         }
         else {
-            return num[0].toMixedNumber()+""+operator[0]+""+num[1].toMixedNumber()+""+operator[1]+""+num[2].toMixedNumber()+""
-                    +operator[2]+""+num[3].toMixedNumber()+""+"=";
+            return num[0].toMixedNumber()+" "+operator[0]+" "+num[1].toMixedNumber()+" "+operator[1]+" "+num[2].toMixedNumber()+" "
+                    +operator[2]+" "+num[3].toMixedNumber()+" "+"=";
         }
     }
 

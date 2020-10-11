@@ -1,5 +1,6 @@
 package org.tool;
 
+import org.demo.Expression;
 import org.demo.Fraction;
 
 import java.util.ArrayList;
@@ -74,6 +75,57 @@ public class MathTool {
         return new Fraction(Integer.parseInt(MixedNumber),1);//纯整数的时候
     }
 
+    //将字符串转化成表达式
+    public static Expression toExpression(String str) {
+        Fraction[] num;
+        ArrayList<String> operator=new ArrayList<>();
+        String[] s9=str.split("、");
+        String s=s9[1].replaceAll(" |=","");
+        for (int i = 0; i < s.length(); i++) {
+            String s10=s.substring(i,i+1);
+            if(s10.equals("+")) operator.add("+");
+            if(s10.equals("-")) operator.add("-");
+            if(s10.equals("×")) operator.add("×");
+            if(s10.equals("÷")) operator.add("÷");
+        }
+
+        //表达式为1个运算符
+        if (1==operator.size()) {
+            String[] ot=new String[1];
+            ot[0]=operator.get(0);
+            String[] s1=s.split("\\+|-|×|÷");
+            Fraction[] n=new Fraction[2];
+            n[0]=toFraction(s1[0]);
+            n[1]=toFraction(s1[1]);
+                return new Expression(n,ot);
+            }
+        //表达式为2个运算符
+        else if(2==operator.size()) {
+            String[] ot=new String[2];
+            ot[0]=operator.get(0);
+            ot[1]=operator.get(1);
+            String[] s1=s.split("\\+|-|×|÷");
+            Fraction[] n=new Fraction[3];
+            n[0]=toFraction(s1[0]);
+            n[1]=toFraction(s1[1]);
+            n[2]=toFraction(s1[2]);
+            return new Expression(n,ot);
+        }
+        //表达式为3个运算符
+        else {
+            String[] ot=new String[3];
+            ot[0]=operator.get(0);
+            ot[1]=operator.get(1);
+            ot[2]=operator.get(2);
+            String[] s1=s.split("\\+|-|×|÷");
+            Fraction[] n=new Fraction[4];
+            n[0]=toFraction(s1[0]);
+            n[1]=toFraction(s1[1]);
+            n[2]=toFraction(s1[2]);
+            n[3]=toFraction(s1[3]);
+            return new Expression(n,ot);
+        }
+        }
 
 }
 
