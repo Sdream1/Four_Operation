@@ -31,18 +31,16 @@ public class MainTest {
 
     @Test
     public void exerciseRunTest() throws IOException {
-        Main.exerciseRun(10,10);
+        Main.exerciseRun(10000,10);
     }
 
     @Test
     public void cheackAnswerTest1() throws IOException {
         Main.checkAnswer("C:\\Users\\ASUS\\Desktop\\FourOperations\\exercisefile.txt","C:\\Users\\ASUS\\Desktop\\FourOperations\\answerfile.txt");
     }
-    @Test
-    public void cheackAnswerTest2() throws IOException {
-        Main.checkAnswer("C:\\Users\\ASUS\\Desktop\\FourOperations\\exercisefile.txt","C:\\Users\\ASUS\\Desktop\\FourOperations\\answerfile.txt");
-    }
-
-
+//    @Test
+//    public void cheackAnswerTest2() throws IOException {
+//        Main.checkAnswer("C:\\Users\\ASUS\\Desktop\\FourOperations\\exercisefile.txt","C:\\Users\\ASUS\\Desktop\\FourOperations\\answerfile.txt");
+//    }
 
 }
